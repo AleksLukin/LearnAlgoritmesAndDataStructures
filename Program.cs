@@ -10,13 +10,15 @@ namespace LearnAlgoritmesAndDataStructures
     {
         static void Main(string[] args)
         {
+            CheckNumber(7);
+            
 
             Console.ReadLine();
         }
         static int CheckNumber(int number)
         {
             int d = 0;
-            int i = 0;
+            int i = 2;
 
             if (i<=number)
             {
@@ -30,7 +32,9 @@ namespace LearnAlgoritmesAndDataStructures
             {
                 Console.WriteLine(number+" - простое число");
             }
-            Console.WriteLine(number + " - простое число");
+            Console.WriteLine(number + " - непростое число");
+
+            return number;
 
         }
     }

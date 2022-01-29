@@ -8,14 +8,51 @@ namespace LearnAlgoritmesAndDataStructures
 {
     class Program
     {
+        public class TestCase
+        {
+
+            public int Expected { get; set; }
+            public int NUMBER { get; set; }
+
+        }
+
         static void Main(string[] args)
         {
-            int randomNumber = 38;
-            CheckNumber(randomNumber);
             
+            var testCase1 = new TestCase()
+            {
+                NUMBER = 4,
+                Expected = 0,
+
+            };
+            TestNumber(testCase1);
+            var testCase2 = new TestCase()
+            {
+                NUMBER = 5,
+                Expected = 0,
+
+            };
+            TestNumber(testCase2);
 
             Console.ReadLine();
+
         }
+        static void TestNumber(TestCase testCase)
+        {
+
+            var actual = CheckNumber(testCase.NUMBER);
+
+            
+            if (actual == testCase.Expected)
+            {
+                Console.WriteLine("действительный тест");
+            }
+            else
+            {
+                Console.WriteLine("недействительный тест");
+            }
+        }
+
         static int CheckNumber(int number)
         {
             int d = 0;
@@ -27,17 +64,23 @@ namespace LearnAlgoritmesAndDataStructures
                 {
                     d++;
                 }
-                i++;
+                else
+                {
+                    i++;
+                }
+                
             }
-            if (d==0)
+            if (d == 0)
             {
-                Console.WriteLine(number+" - простое число");
+                Console.WriteLine(number + " - простое число");
             }
             else
             {
-                Console.WriteLine(number + " - непростое число");                    
+                Console.WriteLine(number + " - непростое число");
+
             }
             return number;
+            
 
         }
     }

@@ -10,7 +10,8 @@ namespace LearnAlgoritmesAndDataStructures
     {
         static void Main(string[] args)
         {
-            CheckNumber(7);
+            int randomNumber = 38;
+            CheckNumber(randomNumber);
             
 
             Console.ReadLine();
@@ -28,12 +29,14 @@ namespace LearnAlgoritmesAndDataStructures
                 }
                 i++;
             }
-            else if (d==0)
+            if (d==0)
             {
                 Console.WriteLine(number+" - простое число");
             }
-            Console.WriteLine(number + " - непростое число");
-
+            else
+            {
+                Console.WriteLine(number + " - непростое число");                    
+            }
             return number;
 
         }

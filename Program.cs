@@ -22,14 +22,14 @@ namespace LearnAlgoritmesAndDataStructures
             var testCase1 = new TestCase()
             {
                 NUMBER = 4,
-                Expected = 0,
+                Expected = 1,
 
             };
             TestNumber(testCase1);
             var testCase2 = new TestCase()
             {
                 NUMBER = 5,
-                Expected = 0,
+                Expected = 1,
 
             };
             TestNumber(testCase2);
@@ -41,15 +41,14 @@ namespace LearnAlgoritmesAndDataStructures
         {
 
             var actual = CheckNumber(testCase.NUMBER);
-
-            
+                       
             if (actual == testCase.Expected)
             {
-                Console.WriteLine("действительный тест");
+                Console.WriteLine("недействительный тест");
             }
             else
             {
-                Console.WriteLine("недействительный тест");
+                Console.WriteLine("действительный тест");
             }
         }
 
@@ -79,7 +78,8 @@ namespace LearnAlgoritmesAndDataStructures
                 Console.WriteLine(number + " - непростое число");
 
             }
-            return number;
+            return d;
+            
             
 
         }

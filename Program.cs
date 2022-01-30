@@ -11,56 +11,86 @@ namespace LearnAlgoritmesAndDataStructures
         public class TestCase
         {
 
-            //public int Expected { get; set; }
-            //public int NUMBER { get; set; }
+            public int Expected { get; set; }
+            public int NUMBER { get; set; }
 
         }
 
         static void Main(string[] args)
         {
-            
-            //var testCase1 = new TestCase()
-            //{
-            //    NUMBER = 4,
-            //    Expected = 1,
 
-            //};
-            //TestNumber(testCase1);
-            //var testCase2 = new TestCase()
-            //{
-            //    NUMBER = 5,
-            //    Expected = 1,
+            var testCase1 = new TestCase()
+            {
+                NUMBER = 4,
+                Expected = 3,
 
-            //};
-            //TestNumber(testCase2);
+            };
+            TestNumberFiboCycle(testCase1);
+            var testCase2 = new TestCase()
+            {
+                NUMBER = 5,
+                Expected = 1,
+
+            };
+            TestNumberFiboReq(testCase2);
 
             Console.ReadLine();
 
         }
-        static void TestNumber(TestCase testCase)
+        static void TestNumberFiboCycle(TestCase testCase)
         {
 
-            //var actual = CheckNumber(testCase.NUMBER);
+            var actual = FibonacchiCycle(testCase.NUMBER);
 
-            //if (actual == testCase.Expected)
-            //{
-            //    Console.WriteLine("недействительный тест");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("действительный тест");
-            //}
+            if (actual == testCase.Expected)
+            {
+                Console.WriteLine("действительный тест");
+            }
+            else
+            {
+                Console.WriteLine("недействительный тест");
+            }
+        }
+        static void TestNumberFiboReq(TestCase testCase)
+        {
+            var actual = FibonacchiRequersion(testCase.NUMBER);
+
+            if (actual==testCase.Expected)
+            {
+                Console.WriteLine("действительный тест");
+            }
+            else
+            {
+                Console.WriteLine("недействительный тест");
+            }
         }
 
-        static int FiboCycle(int number)
+        static int FibonacchiCycle(int number)
         {
+            
+            int inc = 1;
+            int result = 0;
 
-            //return d;         
+            for (int i = 0; i < number; i++)
+            {
+                int temp = result;
+                result = inc;
+                inc += temp;
+            }
+            
+            return result;
 
         }
-        static int FiboRequersion()
+        static int FibonacchiRequersion(int n)
         {
+            if (n == 1 || n == 0)
+            {
+                return n;
+            }
+            int numberFibonacchi = FibonacchiRequersion(n - 1) + FibonacchiRequersion(n - 2);
 
+            
+            return numberFibonacchi;
         }
     }
 }

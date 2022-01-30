@@ -11,28 +11,28 @@ namespace LearnAlgoritmesAndDataStructures
         public class TestCase
         {
 
-            public int Expected { get; set; }
-            public int NUMBER { get; set; }
+            //public int Expected { get; set; }
+            //public int NUMBER { get; set; }
 
         }
 
         static void Main(string[] args)
         {
             
-            var testCase1 = new TestCase()
-            {
-                NUMBER = 4,
-                Expected = 1,
+            //var testCase1 = new TestCase()
+            //{
+            //    NUMBER = 4,
+            //    Expected = 1,
 
-            };
-            TestNumber(testCase1);
-            var testCase2 = new TestCase()
-            {
-                NUMBER = 5,
-                Expected = 1,
+            //};
+            //TestNumber(testCase1);
+            //var testCase2 = new TestCase()
+            //{
+            //    NUMBER = 5,
+            //    Expected = 1,
 
-            };
-            TestNumber(testCase2);
+            //};
+            //TestNumber(testCase2);
 
             Console.ReadLine();
 
@@ -40,47 +40,26 @@ namespace LearnAlgoritmesAndDataStructures
         static void TestNumber(TestCase testCase)
         {
 
-            var actual = CheckNumber(testCase.NUMBER);
-                       
-            if (actual == testCase.Expected)
-            {
-                Console.WriteLine("недействительный тест");
-            }
-            else
-            {
-                Console.WriteLine("действительный тест");
-            }
+            //var actual = CheckNumber(testCase.NUMBER);
+
+            //if (actual == testCase.Expected)
+            //{
+            //    Console.WriteLine("недействительный тест");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("действительный тест");
+            //}
         }
 
-        static int CheckNumber(int number)
+        static int FiboCycle(int number)
         {
-            int d = 0;
-            int i = 2;
 
-            if (i<=number)
-            {
-                if (number%i==0)
-                {
-                    d++;
-                }
-                else
-                {
-                    i++;
-                }
-                
-            }
-            if (d == 0)
-            {
-                Console.WriteLine(number + " - простое число");
-            }
-            else
-            {
-                Console.WriteLine(number + " - непростое число");
+            //return d;         
 
-            }
-            return d;
-            
-            
+        }
+        static int FiboRequersion()
+        {
 
         }
     }

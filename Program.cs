@@ -13,11 +13,11 @@ namespace LearnAlgoritmesAndDataStructures
     {
         static void Main(string[] args)
         {
-            BinarySearch(new int[] { 1, 2, 3, 4, 5, 6 }, 5);
+            BinarySearch(new int[] { 1, 2, 3, 4, 5, 6 }, 1);
 
             Console.ReadLine();
         }
-        public static int BinarySearch(int[] inputArray, int searchValue)
+        public static void BinarySearch(int[] inputArray, int searchValue)
         {
             int min = 0;
             int max = inputArray.Length - 1;
@@ -26,7 +26,9 @@ namespace LearnAlgoritmesAndDataStructures
                 int mid = (min + max) / 2;
                 if (searchValue == inputArray[mid])
                 {
-                    return mid;
+                    //return mid;
+                    Console.WriteLine(mid);
+                    break;
                 }
                 else if (searchValue < inputArray[mid])
                 {
@@ -39,7 +41,7 @@ namespace LearnAlgoritmesAndDataStructures
                 
 
             }
-            return -1;
+            //return -1;
         }
     }
 }

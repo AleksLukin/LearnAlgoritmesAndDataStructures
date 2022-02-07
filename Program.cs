@@ -21,11 +21,11 @@ namespace LearnAlgoritmesAndDataStructures
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите номер задачи - {0} или {1}", 1,3);
+            Console.WriteLine("Введите номер задачи - {0}, {1} или {2}", 1, 3,5);
             int inputNumberTask = int.Parse(Console.ReadLine());
-            if (inputNumberTask==1)
+            if (inputNumberTask == 1)
             {
-                var testCase1 = new TestCase() 
+                var testCase1 = new TestCase()
                 {
                     NUMBER = 4,
                     Expected = 1,
@@ -37,11 +37,11 @@ namespace LearnAlgoritmesAndDataStructures
                     NUMBER = 5,
                     Expected = 1,
 
-                };            
+                };
                 TestCheckNumber(testCase2);
 
             }
-            else
+            else if(inputNumberTask==3)
             {
                 var testCase3 = new TestCase()
                 {
@@ -57,9 +57,12 @@ namespace LearnAlgoritmesAndDataStructures
                     Expected = 1,
 
                 };
-                TestNumberFiboReq(testCase4);                        
+                TestNumberFiboReq(testCase4);
             }
-
+            else if (inputNumberTask==5)
+            {
+                BinarySearch(new int[] { 1, 2, 3 }, 3);
+            }
 
             Console.ReadLine();
 
@@ -75,7 +78,7 @@ namespace LearnAlgoritmesAndDataStructures
 
             if (actual == testCase.Expected)
             {
-                Console.WriteLine("Задача 1: "+"недействительный тест");
+                Console.WriteLine("Задача 1: " + "недействительный тест");
             }
             else
             {
@@ -149,7 +152,7 @@ namespace LearnAlgoritmesAndDataStructures
         /// <returns></returns>
         static int FibonacchiCycle(int number)
         {
-            
+
             int inc = 1;
             int result = 0;
 
@@ -159,7 +162,7 @@ namespace LearnAlgoritmesAndDataStructures
                 result = inc;
                 inc += temp;
             }
-            
+
             return result;
 
         }
@@ -176,8 +179,32 @@ namespace LearnAlgoritmesAndDataStructures
             }
             int numberFibonacchi = FibonacchiRequersion(n - 1) + FibonacchiRequersion(n - 2);
 
-            
+
             return numberFibonacchi;
+        }
+        public static void BinarySearch(int[] inputArray, int searchValue)
+        {
+            int min = 0;
+            int max = inputArray.Length - 1;
+            while (min <= max)
+            {
+                int mid = (min + max) / 2;
+                if (searchValue == inputArray[mid])
+                {
+                    Console.WriteLine("Индекс числа {0} в массиве {1} равен {2}",3,inputArray,mid);
+                    break;
+                }
+                else if (searchValue < inputArray[mid])
+                {
+                    max = mid - 1;
+                }
+                else
+                {
+                    min = mid + 1;
+                }
+
+
+            }
         }
     }
 }

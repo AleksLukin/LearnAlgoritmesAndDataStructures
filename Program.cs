@@ -3,9 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+  
 
 namespace LearnAlgoritmesAndDataStructures
 {
+    public class PointClass
+    {
+        public float X;
+        public float Y;
+    }
+    public struct PointStruct
+    {
+        public float X;
+        public float Y;
+    }
+    public struct PointDouble
+    {
+        public double X;
+        public double Y;
+    }
+    public struct PointStructDouble
+    {
+        public double X;
+        public double Y;
+    }
     class Program
     {
         internal class TestCase
@@ -21,7 +44,7 @@ namespace LearnAlgoritmesAndDataStructures
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите номер задачи - {0}, {1} или {2}", 1, 3,5);
+            Console.WriteLine("Введите номер задачи - {0}, {1},{2} или {3}", 1, 3, 5, 6);
             int inputNumberTask = int.Parse(Console.ReadLine());
             if (inputNumberTask == 1)
             {
@@ -41,7 +64,7 @@ namespace LearnAlgoritmesAndDataStructures
                 TestCheckNumber(testCase2);
 
             }
-            else if(inputNumberTask==3)
+            else if (inputNumberTask == 3)
             {
                 var testCase3 = new TestCase()
                 {
@@ -59,13 +82,15 @@ namespace LearnAlgoritmesAndDataStructures
                 };
                 TestNumberFiboReq(testCase4);
             }
-            else if (inputNumberTask==5)
+            else if (inputNumberTask == 5)
             {
                 BinarySearch(new int[] { 1, 2, 3 }, 3);
             }
-
+            else if (inputNumberTask == 6)
+            {
+                BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+            }
             Console.ReadLine();
-
         }
         /// <summary>
         /// Тесты к методам "CheckNumber", "FibonacchiCycle" и "FibonacchiRequersion"
@@ -182,6 +207,11 @@ namespace LearnAlgoritmesAndDataStructures
 
             return numberFibonacchi;
         }
+        /// <summary>
+        /// Осуществляет бинарный поиск в массиве
+        /// </summary>
+        /// <param name="inputArray"></param>
+        /// <param name="searchValue"></param>
         public static void BinarySearch(int[] inputArray, int searchValue)
         {
             int min = 0;
@@ -191,7 +221,7 @@ namespace LearnAlgoritmesAndDataStructures
                 int mid = (min + max) / 2;
                 if (searchValue == inputArray[mid])
                 {
-                    Console.WriteLine("Индекс числа {0} в массиве {1} равен {2}",3,inputArray,mid);
+                    Console.WriteLine("Индекс числа {0} в массиве {1} равен {2}", 3, inputArray, mid);
                     break;
                 }
                 else if (searchValue < inputArray[mid])
@@ -204,6 +234,63 @@ namespace LearnAlgoritmesAndDataStructures
                 }
 
 
+            }
+        }
+        public class BechmarkClass
+        {
+            PointClass a = new PointClass();
+            PointClass b = new PointClass();
+
+            PointStruct a1 = new PointStruct();
+            PointStruct b1 = new PointStruct();
+
+            PointStructDouble a2 = new PointStructDouble();
+            PointStructDouble b2 = new PointStructDouble();
+
+            public float DistanceRef(PointClass pointClass1, PointClass pointClass2)
+            {
+                float X = pointClass1.X - pointClass2.X;
+                float Y = pointClass2.Y - pointClass2.Y;
+                return (float)Math.Sqrt((X * X) + (Y * Y));
+            }
+            public float DistanceVal(PointStruct pointStruct1, PointStruct pointStruct2)
+            {
+                float X = pointStruct1.X - pointStruct2.X;
+                float Y = pointStruct1.Y - pointStruct2.Y;
+                return (float)Math.Sqrt((X * X) + (Y * Y));
+            }
+            public double DistanceValDouble(PointStructDouble pointStructDouble1, PointStructDouble pointStructDouble2)
+            {
+                double X = pointStructDouble1.X - pointStructDouble2.X;
+                double Y = pointStructDouble1.Y - pointStructDouble2.Y;
+                return Math.Sqrt((X * X) + (Y * Y));
+            }
+            public float DistanceValShort(PointStruct pointStruct1, PointStruct pointStruct2)
+            {
+                float X = pointStruct1.X - pointStruct2.X;
+                float Y = pointStruct1.Y - pointStruct2.Y;
+                return (X * X) + (Y * Y);
+            }
+
+            [Benchmark]
+            public void Test1()
+            {
+                DistanceRef(a, b);
+            }
+            [Benchmark]
+            public void Test2()
+            {
+                DistanceVal(a1, b1);
+            }
+            [Benchmark]
+            public void Test3()
+            {
+                DistanceValDouble(a2, b2);
+            }
+            [Benchmark]
+            public void Test4()
+            {
+                DistanceValShort(a1, b1);
             }
         }
     }

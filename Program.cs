@@ -87,7 +87,7 @@ namespace LearnAlgoritmesAndDataStructures
                 BinarySearch(new int[] { 1, 2, 3 }, 3);
             }
             else if (inputNumberTask == 6)
-                BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+                BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);// не пойму где здесь ошибка
             
             Console.ReadLine();
         }

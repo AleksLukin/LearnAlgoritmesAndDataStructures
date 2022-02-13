@@ -3,9 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+  
 
 namespace LearnAlgoritmesAndDataStructures
 {
+    public class PointClass
+    {
+        public float X;
+        public float Y;
+    }
+    public struct PointStruct
+    {
+        public float X;
+        public float Y;
+    }
+    public struct PointDouble
+    {
+        public double X;
+        public double Y;
+    }
+    public struct PointStructDouble
+    {
+        public double X;
+        public double Y;
+    }
     class Program
     {
         internal class TestCase
@@ -21,11 +44,11 @@ namespace LearnAlgoritmesAndDataStructures
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите номер задачи - {0} или {1}", 1,3);
+            Console.WriteLine("Введите номер задачи - {0}, {1},{2} или {3}", 1, 3, 5, 6);
             int inputNumberTask = int.Parse(Console.ReadLine());
-            if (inputNumberTask==1)
+            if (inputNumberTask == 1)
             {
-                var testCase1 = new TestCase() 
+                var testCase1 = new TestCase()
                 {
                     NUMBER = 4,
                     Expected = 1,
@@ -37,11 +60,11 @@ namespace LearnAlgoritmesAndDataStructures
                     NUMBER = 5,
                     Expected = 1,
 
-                };            
+                };
                 TestCheckNumber(testCase2);
 
             }
-            else
+            else if (inputNumberTask == 3)
             {
                 var testCase3 = new TestCase()
                 {
@@ -57,12 +80,16 @@ namespace LearnAlgoritmesAndDataStructures
                     Expected = 1,
 
                 };
-                TestNumberFiboReq(testCase4);                        
+                TestNumberFiboReq(testCase4);
             }
-
-
+            else if (inputNumberTask == 5)
+            {
+                BinarySearch(new int[] { 1, 2, 3 }, 3);
+            }
+            else if (inputNumberTask == 6)
+                BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);// не пойму где здесь ошибка
+            
             Console.ReadLine();
-
         }
         /// <summary>
         /// Тесты к методам "CheckNumber", "FibonacchiCycle" и "FibonacchiRequersion"
@@ -75,7 +102,7 @@ namespace LearnAlgoritmesAndDataStructures
 
             if (actual == testCase.Expected)
             {
-                Console.WriteLine("Задача 1: "+"недействительный тест");
+                Console.WriteLine("Задача 1: " + "недействительный тест");
             }
             else
             {
@@ -149,7 +176,7 @@ namespace LearnAlgoritmesAndDataStructures
         /// <returns></returns>
         static int FibonacchiCycle(int number)
         {
-            
+
             int inc = 1;
             int result = 0;
 
@@ -159,7 +186,7 @@ namespace LearnAlgoritmesAndDataStructures
                 result = inc;
                 inc += temp;
             }
-            
+
             return result;
 
         }
@@ -176,8 +203,94 @@ namespace LearnAlgoritmesAndDataStructures
             }
             int numberFibonacchi = FibonacchiRequersion(n - 1) + FibonacchiRequersion(n - 2);
 
-            
+
             return numberFibonacchi;
+        }
+        /// <summary>
+        /// Осуществляет бинарный поиск в массиве
+        /// </summary>
+        /// <param name="inputArray"></param>
+        /// <param name="searchValue"></param>
+        public static void BinarySearch(int[] inputArray, int searchValue)
+        {
+            int min = 0;
+            int max = inputArray.Length - 1;
+            while (min <= max)
+            {
+                int mid = (min + max) / 2;
+                if (searchValue == inputArray[mid])
+                {
+                    Console.WriteLine("Индекс числа {0} в массиве {1} равен {2}", 3, inputArray, mid);
+                    break;
+                }
+                else if (searchValue < inputArray[mid])
+                {
+                    max = mid - 1;
+                }
+                else
+                {
+                    min = mid + 1;
+                }
+
+
+            }
+        }
+        public class BechmarkClass
+        {
+            PointClass a = new PointClass();
+            PointClass b = new PointClass();
+
+            PointStruct a1 = new PointStruct();
+            PointStruct b1 = new PointStruct();
+
+            PointStructDouble a2 = new PointStructDouble();
+            PointStructDouble b2 = new PointStructDouble();
+
+            public float DistanceRef(PointClass pointClass1, PointClass pointClass2)
+            {
+                float X = pointClass1.X - pointClass2.X;
+                float Y = pointClass2.Y - pointClass2.Y;
+                return (float)Math.Sqrt((X * X) + (Y * Y));
+            }
+            public float DistanceVal(PointStruct pointStruct1, PointStruct pointStruct2)
+            {
+                float X = pointStruct1.X - pointStruct2.X;
+                float Y = pointStruct1.Y - pointStruct2.Y;
+                return (float)Math.Sqrt((X * X) + (Y * Y));
+            }
+            public double DistanceValDouble(PointStructDouble pointStructDouble1, PointStructDouble pointStructDouble2)
+            {
+                double X = pointStructDouble1.X - pointStructDouble2.X;
+                double Y = pointStructDouble1.Y - pointStructDouble2.Y;
+                return Math.Sqrt((X * X) + (Y * Y));
+            }
+            public float DistanceValShort(PointStruct pointStruct1, PointStruct pointStruct2)
+            {
+                float X = pointStruct1.X - pointStruct2.X;
+                float Y = pointStruct1.Y - pointStruct2.Y;
+                return (X * X) + (Y * Y);
+            }
+
+            [Benchmark]
+            public void Test1()
+            {
+                DistanceRef(a, b);
+            }
+            [Benchmark]
+            public void Test2()
+            {
+                DistanceVal(a1, b1);
+            }
+            [Benchmark]
+            public void Test3()
+            {
+                DistanceValDouble(a2, b2);
+            }
+            [Benchmark]
+            public void Test4()
+            {
+                DistanceValShort(a1, b1);
+            }
         }
     }
 }
